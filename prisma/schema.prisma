@@ -71,21 +71,16 @@ model Verification {
   @@map("verification")
 }
 
-enum TechStack {
-  FULLSTACK
-  FRONTEND
-  BACKEND
-}
-
 model Projects {
-  id          String    @id
-  userId      String    @unique
+  id          String   @id @default(uuid())
+  userId      String   @unique
   title       String
+  category    String
   description String
   githubRepo  String
   liveLink    String
-  techStack   TechStack
-  thumbnail   String
+  techStack   String[]
+  thumbnail   String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
