@@ -10,6 +10,12 @@ const addProject = async (payload: project) => {
   return result;
 };
 
+const getProjects = async () => {
+  const result = await prisma.projects.findMany();
+  return result;
+};
+
 export const projectService = {
   addProject,
+  getProjects,
 };

@@ -32,6 +32,25 @@ const addProjects = async (req: Request, res: Response) => {
   }
 };
 
+const getProjects = async (req: Request, res: Response) => {
+  try {
+    const result = await projectService.getProjects();
+
+    res.status(200).json({
+      success: true,
+      message: "Projects fetched successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error: error,
+    });
+  }
+};
+
 export const projectsController = {
   addProjects,
+  getProjects,
 };
