@@ -73,7 +73,7 @@ model Verification {
 
 model Projects {
   id          String   @id @default(uuid())
-  userId      String   @unique
+  userId      String
   title       String
   category    String
   description String
