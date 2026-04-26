@@ -16,4 +16,7 @@ router.get("/get-projects/:id", projectsController.getProjectDetails)
 // login users projects
 router.get("/my-projects", authMiddleware, projectsController.getMyProjects);
 
+// update project data
+router.patch("/update-project/:id", projectsController.updateProject);
+
 export const projectsRoute = router;

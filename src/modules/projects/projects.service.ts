@@ -44,9 +44,22 @@ const getMyProjects = async (userId: string) => {
   return result;
 };
 
+const updateProject = async (id: string, payload: project) => {
+  const result = await prisma.projects.update({
+    where: {
+      id: id,
+    },
+    data: {
+      ...payload,
+    },
+  });
+  return result;
+};
+
 export const projectService = {
   addProject,
   getProjects,
   getProjectDetails,
   getMyProjects,
+  updateProject,
 };
