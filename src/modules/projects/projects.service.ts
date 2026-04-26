@@ -11,11 +11,32 @@ const addProject = async (payload: project) => {
 };
 
 const getProjects = async () => {
-  const result = await prisma.projects.findMany();
+  const result = await prisma.projects.findMany({
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          image: true,
+        },
+      },
+    },
+  });
+  return result;
+};
+
+const getProjectDetails = async (id: string) => {
+  const result = await prisma.projects.findUnique({
+    where: {
+      id: id,
+    },
+  });
   return result;
 };
 
 export const projectService = {
   addProject,
   getProjects,
+  getProjectDetails,
 };

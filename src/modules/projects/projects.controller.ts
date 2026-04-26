@@ -50,7 +50,26 @@ const getProjects = async (req: Request, res: Response) => {
   }
 };
 
+const getProjectDetails = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await projectService.getProjectDetails(id as string);
+    res.status(200).json({
+      success: true,
+      message: "Project fetched successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error: error,
+    });
+  }
+};
+
 export const projectsController = {
   addProjects,
   getProjects,
+  getProjectDetails,
 };

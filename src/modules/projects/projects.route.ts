@@ -9,4 +9,7 @@ router.post("/add-project", projectsController.addProjects);
 // get all projects
 router.get("/get-projects", projectsController.getProjects)
 
+// project  details
+router.get("/get-projects/:id", projectsController.getProjectDetails)
+
 export const projectsRoute = router;
