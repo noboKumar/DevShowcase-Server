@@ -35,8 +35,18 @@ const getProjectDetails = async (id: string) => {
   return result;
 };
 
+const getMyProjects = async (userId: string) => {
+  const result = await prisma.projects.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+  return result;
+};
+
 export const projectService = {
   addProject,
   getProjects,
   getProjectDetails,
+  getMyProjects,
 };

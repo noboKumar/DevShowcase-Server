@@ -68,8 +68,31 @@ const getProjectDetails = async (req: Request, res: Response) => {
   }
 };
 
+const getMyProjects = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user.id;
+    const result = await projectService.getMyProjects(userId);
+
+    console.log(userId);
+    console.log(result);
+    
+    res.status(200).json({
+      success: true,
+      message: "My projects fetched successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error: error,
+    });
+  }
+};
+
 export const projectsController = {
   addProjects,
   getProjects,
   getProjectDetails,
+  getMyProjects,
 };
