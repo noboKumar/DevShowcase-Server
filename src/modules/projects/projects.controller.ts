@@ -33,8 +33,9 @@ const addProjects = async (req: Request, res: Response) => {
 };
 
 const getProjects = async (req: Request, res: Response) => {
+  const featured = req.query.featured === "true";
   try {
-    const result = await projectService.getProjects();
+    const result = await projectService.getProjects(featured);
 
     res.status(200).json({
       success: true,

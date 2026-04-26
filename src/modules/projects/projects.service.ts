@@ -10,8 +10,9 @@ const addProject = async (payload: project) => {
   return result;
 };
 
-const getProjects = async () => {
+const getProjects = async (featured?: boolean) => {
   const result = await prisma.projects.findMany({
+    orderBy: { createdAt: "desc" },
     include: {
       user: {
         select: {
@@ -23,6 +24,9 @@ const getProjects = async () => {
       },
     },
   });
+  if (featured) {
+    return result.slice(0, 3);
+  }
   return result;
 };
 
