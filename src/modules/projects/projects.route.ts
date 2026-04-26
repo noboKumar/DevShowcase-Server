@@ -19,4 +19,7 @@ router.get("/my-projects", authMiddleware, projectsController.getMyProjects);
 // update project data
 router.patch("/update-project/:id", projectsController.updateProject);
 
+// delete project data
+router.delete("/delete-project/:id", projectsController.deleteProject);
+
 export const projectsRoute = router;
