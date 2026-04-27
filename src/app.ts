@@ -9,7 +9,7 @@ const app: Application = express();
 // parsers
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.PORT || "http://localhost:3000",
     methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
     credentials: true,
   }),
