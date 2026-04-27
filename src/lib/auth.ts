@@ -4,16 +4,23 @@ import { prisma } from "./prisma";
 import config from "../config";
 
 export const auth = betterAuth({
-  database: prismaAdapter(prisma, {
-    provider: "postgresql",
-  }),
+  database: prismaAdapter(prisma, { provider: "postgresql" }),
 
-  emailAndPassword: {
-    enabled: true,
-  },
+  emailAndPassword: { enabled: true },
 
-  trustedOrigins: [process.env.CORS_ORIGIN || "http://localhost:3000"],
-
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:5000",
+  trustedOrigins: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : [],
+  baseURL: process.env.BETTER_AUTH_URL,
   secret: config.auth_secret,
+
+  advanced: {
+    crossSubdomainCookies: {
+      enabled: false,
+    },
+    defaultCookieAttributes: {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+      partitioned: true,
+    },
+  },
 });
